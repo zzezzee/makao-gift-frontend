@@ -105,3 +105,6 @@ dist
 
 # CodeceptJS
 /output/
+
+# Parcel
+.parcel-cache/
