@@ -1,4 +1,4 @@
-import RegisterSuccess from '../conponents/RegisterSuccess';
+import RegisterSuccess from '../components/RegisterSuccess';
 
 export default function SignupSuccessPage() {
   return ((

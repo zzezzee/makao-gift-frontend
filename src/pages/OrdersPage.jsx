@@ -1,4 +1,4 @@
-import Orders from '../conponents/Orders';
+import Orders from '../components/Orders';
 
 export default function OrdersPage() {
   return ((
