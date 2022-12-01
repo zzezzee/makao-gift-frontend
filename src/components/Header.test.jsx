@@ -4,12 +4,26 @@ import Header from './Header';
 
 const context = describe;
 
+const navigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  // eslint-disable-next-line react/prop-types
+  Link({ children, to }) {
+    return (
+      <a href={to}>
+        {children}
+      </a>
+    );
+  },
+  useNavigate() {
+    return navigate;
+  },
+}));
+
 describe('Header', () => {
   function renderHeader() {
     render(
-      <MemoryRouter>
-        <Header />
-      </MemoryRouter>,
+      <Header />,
     );
   }
   it('render header', () => {

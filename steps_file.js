@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+const backdoorBaseUrl = 'http://localhost:8000/backdoor';
+
 module.exports = () => actor({
   // 홈페이지
   seeHomePageWithProduct() {
