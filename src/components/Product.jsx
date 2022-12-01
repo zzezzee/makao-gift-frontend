@@ -1,45 +1,44 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useProductStore from '../hooks/useProductStore';
 
 export default function Product() {
   const navigate = useNavigate();
 
-  // TODO: id로 상품 찾아오기
+  const productStore = useProductStore();
 
-  // TODO 이런 카운트가 있으면 될듯, -> orderStore에서 관리?
-  const [quantity, setQuantity] = useState(0);
+  const { product } = productStore;
 
-  const product = {
-    id: 1,
-    maker: '제조사는 이러하다',
-    name: '상품이름',
-    price: 10000,
-    description: '상품설명은 이러하다',
-  };
+  const [quantity, setQuantity] = useState(1);
 
   const {
-    id, maker, name, price, description,
+    maker, name, price, description, image,
   } = product;
 
-  const handleMinus = () => {
-    setQuantity(quantity - 1);
+  const handleClickMinus = () => {
+    if (quantity >= 1) {
+      setQuantity(quantity - 1);
+    }
   };
 
-  const handlePlus = () => {
+  const handleClickPlus = () => {
     setQuantity(quantity + 1);
   };
 
   const handleClickGift = () => {
-    navigate('/order', {
-      state: {
-        product,
-        quantity,
-      },
-    });
+    if (quantity >= 1) {
+      navigate('/order', {
+        state: {
+          product,
+          quantity,
+        },
+      });
+    }
   };
 
   return ((
     <div>
+      <img alt="우유" src={image} height="220" width="180" />
       <p>{name}</p>
       <p>{price}</p>
       <p>
@@ -49,9 +48,9 @@ export default function Product() {
       </p>
       <p>
         구매 수량
-        <button type="button" onClick={handleMinus}>-</button>
+        <button type="button" onClick={handleClickMinus}>-</button>
         {quantity}
-        <button type="button" onClick={handlePlus}>+</button>
+        <button type="button" onClick={handleClickPlus}>+</button>
       </p>
       <p>
         상품설명

@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+const backdoorBaseUrl = 'http://localhost:8000/backdoor';
+
 module.exports = () => actor({
   // 홈페이지
   seeHomePageWithProduct() {
@@ -92,5 +95,10 @@ module.exports = () => actor({
     this.see('받는 분');
     this.see('받는 분 주소');
     this.see('받는 분께 보내는 메세지');
+  },
+
+  // BackDoor
+  setupDatabase() {
+    this.amOnPage(`${backdoorBaseUrl}/setup-database`);
   },
 });

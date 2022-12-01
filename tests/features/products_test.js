@@ -1,5 +1,11 @@
 Feature('상품 목록 확인 화면');
 
+Before(({ I }) => {
+  I.setupDatabase();
+
+  // TODO: 로그인
+});
+
 Scenario('상품이 존재하지 않는 경우', ({ I }) => {
   // Given
   // 상품 전부 삭제
@@ -19,7 +25,7 @@ Scenario('상품이 1개 존재하는 경우', ({ I }) => {
   I.amOnPage('/products');
 
   // Then
-  I.see('상품정보..../?');
+  I.see('롯데푸드');
 });
 
 Scenario('상품이 9개 존재하는 경우', ({ I }) => {

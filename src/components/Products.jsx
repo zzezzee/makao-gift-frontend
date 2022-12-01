@@ -1,14 +1,9 @@
-export default function Products() {
-  // TODO: productStore 에서 상품목록 가져와서 뿌리기
+import useProductStore from '../hooks/useProductStore';
 
-  const products = [
-    {
-      id: 1, maker: '제조사1', name: '상품이름', price: 10000,
-    },
-    {
-      id: 2, maker: '제조사2', name: '상품이름2', price: 1012000,
-    },
-  ];
+export default function Products() {
+  const productStore = useProductStore();
+
+  const { products } = productStore;
 
   return ((
     <div>
@@ -22,6 +17,7 @@ export default function Products() {
           ? products.map((product) => (
             <li key={product.id}>
               <a href={`/products/${product.id}`}>
+                <img alt="우유" src={product.image} height="220" width="180" />
                 <p>{product.maker}</p>
                 <p>{product.name}</p>
                 <p>

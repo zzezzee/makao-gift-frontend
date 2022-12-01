@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function RegisterSuccess() {
   const navigate = useNavigate();
-  
+
   const handleClickLogin = () => {
     navigate('/login');
   };
