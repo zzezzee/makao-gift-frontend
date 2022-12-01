@@ -20,6 +20,19 @@ const server = setupServer(
       ],
     }),
   )),
+
+  rest.get(`${baseURL}/products/1`, async (req, res, ctx) => res(
+    ctx.json({
+      product:
+        {
+          id: 1,
+          name: '이건 1번 상품',
+          price: 10000,
+          maker: 'mega',
+          description: '이건 상품설명 1번',
+        },
+    }),
+  )),
 );
 
 export default server;

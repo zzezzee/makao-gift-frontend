@@ -1,75 +1,54 @@
-import { useForm } from 'react-hook-form';
-import { useLocation } from 'react-router-dom';
-
 export default function Order() {
-  const { state } = useLocation();
-
-  const {
-    register, handleSubmit, formState: { errors },
-  } = useForm();
-
-  const { product } = state;
-  const { quantity } = state;
-
-  const { maker, name, price } = product;
-
-  const onSubmit = async (data) => {
-    // orders에 order추가
-    // 주문조회 페이지 /orders로 이동
+  // 네비게이터로 넘겨주기 아니면 orders에서 1개만 가져오기
+  const order = {
+    id: 1,
+    product: {
+      maker: '제조사1',
+      name: '상품이름',
+      price: 10000,
+    },
+    quantity: 1,
+    totalPrice: 120000,
+    date: '2022-10-01',
+    receiver: 'zzezze',
+    address: '서울시',
+    message: '안녕',
   };
 
   return ((
     <div>
-      <p>{maker}</p>
-      <p>{name}</p>
+      <p>{order.product.maker}</p>
+      <p>{order.product.name}</p>
       <p>
-        구매수량:
-        {quantity}
-      </p>
-      <p>
-        총 상품금액:
+        구매수량
         {' '}
-        { price * quantity}
+        {order.quantity}
       </p>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="input-receiver">받는 분 성함</label>
-          <input
-            id="input-receiver"
-            type="text"
-            {...register('receiver', { required: true, pattern: /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{3,7}$/ })}
-          />
-          {errors.receiver && errors.receiver.type === 'required'
-            && (<p>이름을 입력해주세요</p>)}
-          {errors.receiver && errors.receiver.type === 'pattern'
-            && (<p>3~7자까지 한글만 사용 가능</p>)}
-          {!errors.receiver
-            && (<p>3~7자까지 한글만 사용 가능</p>)}
-        </div>
-        <div>
-          <label htmlFor="input-address">아이디:</label>
-          <input
-            type="text"
-            id="input-address"
-            {...register('address')}
-          />
-          {errors.address
-        && errors.address.type === 'required'
-        && (<p>주소를 입력해주세요</p>)}
-          {!errors.address
-          && (<p>주소지를 입력해주세요</p>)}
-        </div>
-        <div>
-          <label htmlFor="input-password">비밀번호:</label>
-          <input
-            id="input-password"
-            type="password"
-            {...register('password')}
-          />
-          <p>100글자 이내로 입력해주세요</p>
-        </div>
-        <button type="submit">선물하기</button>
-      </form>
+      <p>
+        총 상품금액
+        {' '}
+        {order.totalPrice}
+      </p>
+      <p>
+        구매일
+        {' '}
+        {order.date}
+      </p>
+      <p>
+        받는 분
+        {' '}
+        {order.receiver}
+      </p>
+      <p>
+        받는 분 주소
+        {' '}
+        {order.address}
+      </p>
+      <p>
+        받는 분께 보내는 메세지
+        {' '}
+        {order.message}
+      </p>
     </div>
   ));
 }

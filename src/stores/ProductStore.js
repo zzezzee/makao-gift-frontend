@@ -14,6 +14,13 @@ export default class ProductStore extends Store {
 
     this.publish();
   }
+
+  async fetchProduct(id) {
+    this.product = await apiService.fetchProduct(id);
+
+    console.log(this.product);
+    this.publish();
+  }
 }
 
 export const productStore = new ProductStore();

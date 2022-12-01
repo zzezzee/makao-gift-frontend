@@ -16,4 +16,12 @@ describe('ProductStore', () => {
       expect(productStore.products.length).toBe(1);
     });
   });
+
+  describe('fetchProducts', () => {
+    it('sets product', async () => {
+      await productStore.fetchProduct(1);
+
+      expect(productStore.product).not.toBeNull();
+    });
+  });
 });
