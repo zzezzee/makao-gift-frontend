@@ -96,4 +96,9 @@ module.exports = () => actor({
     this.see('받는 분 주소');
     this.see('받는 분께 보내는 메세지');
   },
+
+  // BackDoor
+  setupDatabase() {
+    this.amOnPage(`${backdoorBaseUrl}/setup-database`);
+  },
 });
