@@ -10,7 +10,7 @@ describe('ProductStore', () => {
   });
 
   describe('fetchProducts', () => {
-    it('sets products', async () => {
+    it('set products', async () => {
       await productStore.fetchProducts();
 
       expect(productStore.products.length).toBe(1);

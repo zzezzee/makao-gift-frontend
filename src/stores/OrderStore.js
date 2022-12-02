@@ -1,4 +1,4 @@
-import { apiService } from '../services/ApiService';
+import { orderApiService } from '../services/OrderApiService';
 import Store from './Store';
 
 export default class OrderStore extends Store {
@@ -11,11 +11,17 @@ export default class OrderStore extends Store {
     this.orderState = '';
   }
 
+  async fetchOrders() {
+    this.orders = await orderApiService.fetchOrders();
+
+    this.publish();
+  }
+
   async requestOrder({
     productId, quantity, receiver, address, message,
   }) {
     try {
-      const id = await apiService.createOrder({
+      const id = await orderApiService.createOrder({
         productId,
         quantity,
         receiver,

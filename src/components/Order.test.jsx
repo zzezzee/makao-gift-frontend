@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import Order from './Order';
 
-test('OrderDetail', () => {
+test('Order', () => {
   render(<Order />);
 
   screen.getByText(/구매수량/);

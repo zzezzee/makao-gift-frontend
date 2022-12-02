@@ -1,4 +1,4 @@
-import { apiService } from '../services/ApiService';
+import { productApiService } from '../services/ProductApiService';
 import Store from './Store';
 
 export default class ProductStore extends Store {
@@ -10,13 +10,13 @@ export default class ProductStore extends Store {
   }
 
   async fetchProducts() {
-    this.products = await apiService.fetchProducts();
+    this.products = await productApiService.fetchProducts();
 
     this.publish();
   }
 
   async fetchProduct(id) {
-    this.product = await apiService.fetchProduct(id);
+    this.product = await productApiService.fetchProduct(id);
 
     this.publish();
   }

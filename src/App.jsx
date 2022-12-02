@@ -3,7 +3,7 @@ import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import OrderFormPage from './pages/OrderFormPage';
-import OrderPage from './pages/OrderFormPage';
+import OrderPage from './pages/OrderPage';
 import OrdersPage from './pages/OrdersPage';
 import ProductPage from './pages/ProductPage';
 import ProductsPage from './pages/ProductsPage';

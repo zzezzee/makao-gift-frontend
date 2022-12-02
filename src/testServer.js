@@ -34,6 +34,16 @@ const server = setupServer(
     }),
   )),
 
+  rest.get(`${baseURL}/orders`, async (req, res, ctx) => res(
+    ctx.json({
+      orders: [
+        {
+          id: 1,
+        },
+      ],
+    }),
+  )),
+
   rest.post(`${baseURL}/orders`, async (req, res, ctx) => res(
     ctx.json({
       id: 1,
