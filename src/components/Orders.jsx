@@ -1,22 +1,11 @@
-export default function Orders() {
-  // TODO OrderStore에서 orders 받아오기
+import useOrderStore from '../hooks/useOrderStore';
 
-  const orders = [
-    {
-      id: 1,
-      product: {
-        maker: '제조사1',
-        name: '상품이름',
-        price: 10000,
-      },
-      quantity: 1,
-      totalPrice: 120000,
-      date: '2022-10-01',
-      receiver: 'zzezze',
-      address: '서울시',
-      message: '안녕',
-    },
-  ];
+export default function Orders() {
+  const orderStore = useOrderStore();
+
+  const { orders } = orderStore;
+
+  console.log(orders);
 
   return ((
     <div>
@@ -28,8 +17,9 @@ export default function Orders() {
           && orders.map((order) => (
             <li key={order.id}>
               <a href={`/orders/${order.id}`}>
-                <p>{order.product.maker}</p>
-                <p>{order.product.name}</p>
+                <img src={order.image} alt="상품사진" height="220" width="180" />
+                <p>{order.maker}</p>
+                <p>{order.name}</p>
                 <p>
                   To.
                   {' '}

@@ -17,8 +17,8 @@ export default function Order() {
 
   return ((
     <div>
-      <p>{order.product.maker}</p>
-      <p>{order.product.name}</p>
+      <p>{order.maker}</p>
+      <p>{order.name}</p>
       <p>
         구매수량
         {' '}

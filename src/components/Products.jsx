@@ -5,6 +5,8 @@ export default function Products() {
 
   const { products } = productStore;
 
+  console.log(products);
+
   return ((
     <div>
       <div>
