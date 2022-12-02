@@ -16,7 +16,7 @@ export default function Product() {
   } = product;
 
   const handleClickMinus = () => {
-    if (quantity >= 1) {
+    if (quantity > 1) {
       setQuantity(quantity - 1);
     }
   };
@@ -46,12 +46,12 @@ export default function Product() {
         {' '}
         {maker}
       </p>
-      <p>
+      <div>
         구매 수량
         <button type="button" onClick={handleClickMinus}>-</button>
-        {quantity}
+        <div>{quantity}</div>
         <button type="button" onClick={handleClickPlus}>+</button>
-      </p>
+      </div>
       <p>
         상품설명
         {' '}
