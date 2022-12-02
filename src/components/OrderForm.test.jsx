@@ -1,7 +1,14 @@
-import { render } from '@testing-library/react';
+import {
+  fireEvent, render, screen, waitFor,
+} from '@testing-library/react';
 import OrderForm from './OrderForm';
 
+const navigate = jest.fn();
+
 jest.mock('react-router-dom', () => ({
+  useNavigate() {
+    return navigate;
+  },
   useLocation() {
     return {
       state: {
@@ -18,8 +25,32 @@ jest.mock('react-router-dom', () => ({
   },
 }));
 
-test('Order', () => {
-  render(
-    <OrderForm />,
-  );
+const context = describe;
+
+describe('Order', () => {
+  context('when click 선물하기 with correct input', () => {
+    it('go to orders page', async () => {
+      render(
+        <OrderForm />,
+      );
+
+      fireEvent.change(screen.getByLabelText('받는 분 성함'), {
+        target: { value: '홍길동' },
+      });
+
+      fireEvent.change(screen.getByLabelText('받는 분 주소'), {
+        target: { value: '서울시 광진구 자양로' },
+      });
+
+      fireEvent.change(screen.getByLabelText('받는 분께 보내는 메세지'), {
+        target: { value: '선물입니다' },
+      });
+
+      fireEvent.click(screen.getByRole('button', { name: '선물하기' }));
+
+      await waitFor(() => {
+        expect(navigate).toBeCalled();
+      });
+    });
+  });
 });

@@ -26,52 +26,50 @@ jest.mock('../hooks/useProductStore', () => () => ({
 
 describe('Product', () => {
   context('when click plus button', () => {
-    it('quantity increase', () => {
+    it('quantity increase', async () => {
       render(<Product />);
 
       fireEvent.click(screen.getByRole('button', { name: '+' }));
 
-      waitFor(() => {
+      await waitFor(() => {
         screen.getByText('2');
       });
     });
   });
 
   context('when click minus button', () => {
-    it('quantity decrease', () => {
+    it('quantity decrease', async () => {
       render(<Product />);
 
       fireEvent.click(screen.getByRole('button', { name: '+' }));
 
       fireEvent.click(screen.getByRole('button', { name: '-' }));
 
-      waitFor(() => {
+      await waitFor(() => {
         screen.getByText('1');
       });
     });
   });
 
   context('when click minus button at quantity is 0', () => {
-    it('quantity unchanged', () => {
+    it('quantity unchanged', async () => {
       render(<Product />);
 
       fireEvent.click(screen.getByRole('button', { name: '-' }));
 
-      waitFor(() => {
+      await waitFor(() => {
         screen.getByText('1');
       });
     });
   });
 
-  context('when 선물하기 success', () => {
-    it('go to order Page', () => {
+  context('when gift success', () => {
+    it('go to order Page', async () => {
       render(<Product />);
 
       fireEvent.click(screen.getByRole('button', { name: '선물하기' }));
 
-      waitFor(() => {
-        screen.getByText('받는 분 성함');
-      });
+      expect(navigate).toBeCalled();
     });
   });
 });

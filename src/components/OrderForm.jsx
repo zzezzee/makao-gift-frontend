@@ -1,8 +1,11 @@
 import { useForm } from 'react-hook-form';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { orderStore } from '../stores/OrderStore';
 
 export default function OrderForm() {
   const { state } = useLocation();
+
+  const navigate = useNavigate();
 
   const {
     register, handleSubmit, formState: { errors },
@@ -10,11 +13,23 @@ export default function OrderForm() {
 
   const { product, quantity } = state;
 
-  const { maker, name, price } = product;
+  const {
+    id, maker, name, price,
+  } = product;
 
   const onSubmit = async (data) => {
-    // order추가
+    const { receiver, address, message } = data;
+
+    await orderStore.requestOrder({
+      productId: id,
+      quantity,
+      receiver,
+      address,
+      message,
+    });
+
     // 주문조회 페이지 /orders로 이동
+    navigate('/orders');
   };
 
   return ((
@@ -46,7 +61,7 @@ export default function OrderForm() {
             && (<p>3~7자까지 한글만 사용 가능</p>)}
         </div>
         <div>
-          <label htmlFor="input-address">아이디:</label>
+          <label htmlFor="input-address">받는 분 주소</label>
           <input
             type="text"
             id="input-address"
@@ -59,11 +74,11 @@ export default function OrderForm() {
           && (<p>주소지를 입력해주세요</p>)}
         </div>
         <div>
-          <label htmlFor="input-password">비밀번호:</label>
+          <label htmlFor="input-message">받는 분께 보내는 메세지</label>
           <input
-            id="input-password"
-            type="password"
-            {...register('password')}
+            id="input-message"
+            type="message"
+            {...register('message')}
           />
           <p>100글자 이내로 입력해주세요</p>
         </div>

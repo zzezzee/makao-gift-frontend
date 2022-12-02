@@ -18,7 +18,6 @@ export default class ProductStore extends Store {
   async fetchProduct(id) {
     this.product = await apiService.fetchProduct(id);
 
-    console.log(this.product);
     this.publish();
   }
 }
