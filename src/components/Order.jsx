@@ -1,19 +1,9 @@
+import useOrderStore from '../hooks/useOrderStore';
+
 export default function Order() {
-  // 네비게이터로 넘겨주기 아니면 orders에서 1개만 가져오기
-  const order = {
-    id: 1,
-    product: {
-      maker: '제조사1',
-      name: '상품이름',
-      price: 10000,
-    },
-    quantity: 1,
-    totalPrice: 120000,
-    date: '2022-10-01',
-    receiver: 'zzezze',
-    address: '서울시',
-    message: '안녕',
-  };
+  const orderStore = useOrderStore();
+
+  const { order } = orderStore;
 
   return ((
     <div>
@@ -32,7 +22,7 @@ export default function Order() {
       <p>
         구매일
         {' '}
-        {order.date}
+        {order.createdAt}
       </p>
       <p>
         받는 분

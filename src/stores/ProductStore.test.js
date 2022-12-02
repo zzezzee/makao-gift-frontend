@@ -9,7 +9,7 @@ describe('ProductStore', () => {
     productStore = new ProductStore();
   });
 
-  describe('fetchProducts', () => {
+  context('when fetchProducts', () => {
     it('set products', async () => {
       await productStore.fetchProducts();
 
@@ -17,11 +17,11 @@ describe('ProductStore', () => {
     });
   });
 
-  describe('fetchProducts', () => {
+  context('when fetchProduct', () => {
     it('sets product', async () => {
       await productStore.fetchProduct(1);
 
-      expect(productStore.product).not.toBeNull();
+      expect(productStore.product).toBeTruthy();
     });
   });
 });
