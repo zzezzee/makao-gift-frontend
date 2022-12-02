@@ -17,6 +17,16 @@ export default class OrderApiService {
     return orders;
   }
 
+  async fetchOrder(id) {
+    const url = `${baseURL}/orders/${id}`;
+
+    const { data } = await axios.get(url);
+
+    const order = data;
+
+    return order;
+  }
+
   async createOrder({
     productId,
     quantity,

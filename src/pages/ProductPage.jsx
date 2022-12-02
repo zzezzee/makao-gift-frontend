@@ -8,7 +8,7 @@ export default function ProductPage() {
 
   const productStore = useProductStore();
 
-  const productId = Number(location.pathname.split('/')[2]);
+  const productId = location.pathname.split('/')[2];
 
   useEffect(() => {
     productStore.fetchProduct(productId);

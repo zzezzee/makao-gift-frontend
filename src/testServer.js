@@ -21,7 +21,7 @@ const server = setupServer(
     }),
   )),
 
-  rest.get(`${baseURL}/products/1`, async (req, res, ctx) => res(
+  rest.get(`${baseURL}/products/:productId`, async (req, res, ctx) => res(
     ctx.json({
       product:
         {
@@ -41,6 +41,15 @@ const server = setupServer(
           id: 1,
         },
       ],
+    }),
+  )),
+
+  rest.get(`${baseURL}/orders/:orderId`, async (req, res, ctx) => res(
+    ctx.json({
+      order:
+        {
+          id: 1,
+        },
     }),
   )),
 

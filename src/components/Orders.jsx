@@ -5,8 +5,6 @@ export default function Orders() {
 
   const { orders } = orderStore;
 
-  console.log(orders);
-
   return ((
     <div>
       {orders.length

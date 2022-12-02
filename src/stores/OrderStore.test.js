@@ -38,4 +38,12 @@ describe('OrderStore', () => {
       expect(orderStore.orders.length).toBe(1);
     });
   });
+
+  context('when fetch order', () => {
+    it('sets order', async () => {
+      await orderStore.fetchOrder(1);
+
+      expect(orderStore.order).toBeTruthy();
+    });
+  });
 });

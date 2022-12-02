@@ -17,6 +17,12 @@ export default class OrderStore extends Store {
     this.publish();
   }
 
+  async fetchOrder(id) {
+    this.order = await orderApiService.fetchOrder(id);
+
+    this.publish();
+  }
+
   async requestOrder({
     productId, quantity, receiver, address, message,
   }) {
