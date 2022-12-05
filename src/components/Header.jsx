@@ -1,5 +1,8 @@
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useLocalStorage } from 'usehooks-ts';
+import useUserStore from '../hooks/useUserStore';
 
 const List = styled.ul`
   display: flex;
@@ -19,15 +22,16 @@ const Wrapper = styled.nav`
 export default function Header() {
   const navigate = useNavigate();
 
-  // TODO: AccessToken에 따라서 헤더에 보여줄 내용을 다르게 하기
-  let accesstoken = '123';
+  const userStore = useUserStore();
 
-  // TODO: store에서 내 잔액 가져오기
-  const amount = 50000;
+  useEffect(() => {
+    userStore.fetchUser();
+  }, []);
+
+  const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
 
   const handleLogout = () => {
-    accesstoken = '';
-    console.log('로그아웃');
+    setAccessToken('');
     navigate('/');
   };
 
@@ -45,16 +49,16 @@ export default function Header() {
             <Link to="/products">스토어</Link>
           </li>
           <li>
-            <Link to={accesstoken ? '/orders' : 'login'}>주문조회</Link>
+            <Link to={accessToken ? '/orders' : 'login'}>주문조회</Link>
           </li>
         </List>
-        {accesstoken
+        {accessToken
           ? (
             <List>
               <li>
                 내 잔액:
                 {' '}
-                {amount}
+                {userStore.amount}
               </li>
               <li>
                 <button type="button" onClick={handleLogout}>로그아웃</button>

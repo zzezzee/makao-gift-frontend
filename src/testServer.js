@@ -58,6 +58,13 @@ const server = setupServer(
       id: 1,
     }),
   )),
+
+  rest.post(`${baseURL}/session`, async (req, res, ctx) => res(
+    ctx.json({
+      accessToken: 'ACCESSTOKEN',
+      amount: 500000,
+    }),
+  )),
 );
 
 export default server;

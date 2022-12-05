@@ -101,4 +101,15 @@ module.exports = () => actor({
   setupDatabase() {
     this.amOnPage(`${backdoorBaseUrl}/setup-database`);
   },
+
+  login(username) {
+    this.amOnPage('/login');
+
+    this.fillField('아이디', username);
+    this.fillField('비밀번호', 'Password123!');
+
+    this.click('로그인하기');
+
+    this.waitForText('로그아웃');
+  },
 });

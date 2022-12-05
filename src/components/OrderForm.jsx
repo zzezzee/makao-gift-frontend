@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocalStorage } from 'usehooks-ts';
 import { orderStore } from '../stores/OrderStore';
 
 export default function OrderForm() {
@@ -17,7 +18,14 @@ export default function OrderForm() {
     id, maker, name, price,
   } = product;
 
+  const [accessToken] = useLocalStorage('accessToken', '');
+
   const onSubmit = async (data) => {
+    if (!accessToken) {
+      navigate('/login');
+      return;
+    }
+
     const { receiver, address, message } = data;
 
     await orderStore.requestOrder({
@@ -28,7 +36,6 @@ export default function OrderForm() {
       message,
     });
 
-    // 주문조회 페이지 /orders로 이동
     navigate('/orders');
   };
 

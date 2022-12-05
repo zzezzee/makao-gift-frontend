@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useLocalStorage } from 'usehooks-ts';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -9,8 +11,17 @@ import ProductPage from './pages/ProductPage';
 import ProductsPage from './pages/ProductsPage';
 import SignupPage from './pages/SignupPage';
 import SignupSuccessPage from './pages/SignupSuccessPage';
+import { orderApiService } from './services/OrderApiService';
+import { userApiService } from './services/UserApiService';
 
 export default function App() {
+  const [accessToken] = useLocalStorage('accessToken', '');
+
+  useEffect(() => {
+    userApiService.setAccessToken(accessToken);
+    orderApiService.setAccessToken(accessToken);
+  }, [accessToken]);
+
   return ((
     <div>
       <Header />
