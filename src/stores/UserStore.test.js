@@ -10,7 +10,7 @@ describe('UserStore', () => {
   });
 
   context('when login', () => {
-    it('set a', async () => {
+    it('set amount', async () => {
       await userStore.login({
         username: 'zzezze',
         password: 'Password123!',

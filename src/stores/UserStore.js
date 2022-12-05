@@ -29,6 +29,15 @@ export default class UserStore extends Store {
       return '';
     }
   }
+
+  async register({ name, username, password }) {
+    try {
+      const { amount } = await userApiService.createUser({ name, username, password });
+      return amount;
+    } catch (e) {
+      return '';
+    }
+  }
 }
 
 export const userStore = new UserStore();
