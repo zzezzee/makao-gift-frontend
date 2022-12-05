@@ -32,6 +32,15 @@ export default class UserApiService {
       amount: data.amount,
     };
   }
+
+  async createUser({ name, username, password }) {
+    const url = `${baseURL}/users`;
+    const { data } = await axios.post(url, { name, username, password });
+
+    return {
+      amount: data.amount,
+    };
+  }
 }
 
 export const userApiService = new UserApiService();

@@ -1,18 +1,27 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { userStore } from '../stores/UserStore';
 
 export default function RegisterForm() {
+  const navigate = useNavigate();
+
   const {
     register, handleSubmit, formState: { errors }, getValues,
   } = useForm();
 
   const onSubmit = async (data) => {
-    // const {
-    //   name, accountNumber, password, passwordConfirm,
-    // } = data;
+    const {
+      name, username, password, passwordConfirm,
+    } = data;
 
-    // TODO: data를 이용해서 userStore에서 회원가입
-    // TODO: 회원가입 후 회원가입 성공 페이지로 이동
+    const id = await userStore.register({
+      name, username, password,
+    });
+
+    if (typeof id === 'number') {
+      navigate('/login');
+    }
   };
 
   return ((

@@ -65,6 +65,12 @@ const server = setupServer(
       amount: 500000,
     }),
   )),
+
+  rest.post(`${baseURL}/users`, async (req, res, ctx) => res(
+    ctx.json({
+      amount: 500000,
+    }),
+  )),
 );
 
 export default server;

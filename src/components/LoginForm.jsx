@@ -54,7 +54,7 @@ export default function LoginForm() {
             {...register('password', { required: true })}
           />
           {errors.username
-              && <p>계좌번호를 입력해주세요</p>}
+              && <p>아이디를 입력해주세요</p>}
           {errors.password
               && <p>비밀번호를 입력해 주세요</p>}
         </div>
