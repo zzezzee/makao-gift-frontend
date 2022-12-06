@@ -3,10 +3,16 @@ const backdoorBaseUrl = 'http://localhost:8000/backdoor';
 
 module.exports = () => actor({
   // 홈페이지
-  seeHomePageWithProduct() {
+  seeHomePage() {
+    this.see('무얼 선물할 지 고민이라면');
+    this.see('특별한 아이템을 전하세요');
+    this.see('마카오 선물하기에서만 볼 수 있는 특별한 아이템');
+  },
+  // 상품 목록 페이지
+  seeProductsPageWithProducts() {
     this.see('인기 선물을 한자리에 모았어요');
   },
-  seeHomePageWithoutProduct() {
+  seeProductsPageWithoutProducts() {
     this.see('상품이 존재하지 않습니다');
   },
 
@@ -60,8 +66,6 @@ module.exports = () => actor({
   // 로그인 페이지
   seeLoginPage() {
     this.see('USER LOGIN');
-    this.see('아이디');
-    this.see('비밀번호');
     this.see('로그인하기');
     this.see('회원가입');
   },
@@ -102,14 +106,18 @@ module.exports = () => actor({
     this.amOnPage(`${backdoorBaseUrl}/setup-database`);
   },
 
-  login(username) {
+  login({ username, password }) {
     this.amOnPage('/login');
 
     this.fillField('아이디', username);
-    this.fillField('비밀번호', 'Password123!');
+    this.fillField('비밀번호', password);
 
     this.click('로그인하기');
+  },
 
-    this.waitForText('로그아웃');
+  order() {
+    this.amOnPage('/products');
+
+    this.Click();
   },
 });

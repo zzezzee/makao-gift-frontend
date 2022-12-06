@@ -59,18 +59,37 @@ const server = setupServer(
     }),
   )),
 
-  rest.post(`${baseURL}/session`, async (req, res, ctx) => res(
-    ctx.json({
-      accessToken: 'ACCESSTOKEN',
-      amount: 500000,
-    }),
-  )),
+  rest.post(`${baseURL}/session`, async (req, res, ctx) => {
+    const { username, password } = await req.json();
 
-  rest.post(`${baseURL}/users`, async (req, res, ctx) => res(
-    ctx.json({
-      amount: 500000,
-    }),
-  )),
+    if (username === '1234' && password === 'Password123!') {
+      return res(
+        ctx.json({
+          amount: 100_000,
+          accessToken: 'ACCESSTOKEN',
+        }),
+      );
+    }
+
+    return res(
+      ctx.status(400),
+    );
+  }),
+
+  rest.post(`${baseURL}/users`, async (req, res, ctx) => {
+    const { username } = await req.json();
+    if (username === 'existusername') {
+      return res(
+        ctx.status(400),
+      );
+    }
+
+    return res(
+      ctx.json({
+        amount: 500000,
+      }),
+    );
+  }),
 );
 
 export default server;

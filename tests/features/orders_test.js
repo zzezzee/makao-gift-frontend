@@ -1,20 +1,20 @@
 Feature('주문 목록 화면');
 
-Scenario('주문 목록 화면', ({ I }) => {
+Scenario('로그인을 안한 채로 주문 목록 화면을 누를 때', ({ I }) => {
   // When
-  I.amOnPage('/orders');
+  I.click('주문조회');
 
   // Then
-  I.seeOrderFields();
+  I.seeOrdersFields();
 });
 
 Scenario('주문 목록이 있는 경우', ({ I }) => {
   // Given
-  // 로그인
-  // 주문 목록
+  I.login();
+  I.order();
 
   // When
-  I.amOnPage('/orders');
+  I.click('주문조회');
 
   // Then
   I.see('내가 주문한 내역입니다');

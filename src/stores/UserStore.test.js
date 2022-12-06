@@ -12,7 +12,7 @@ describe('UserStore', () => {
   context('when login', () => {
     it('set amount', async () => {
       await userStore.login({
-        username: 'zzezze',
+        username: '1234',
         password: 'Password123!',
       });
 

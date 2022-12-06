@@ -6,6 +6,8 @@ export default class UserStore extends Store {
     super();
 
     this.amount = 0;
+    this.errorMessage = '';
+    this.errorState = '';
   }
 
   async fetchUser() {
@@ -17,6 +19,8 @@ export default class UserStore extends Store {
   }
 
   async login({ username, password }) {
+    this.errorMessage = '';
+
     try {
       const { accessToken, amount } = await userApiService.postSession({
         username, password,
@@ -26,17 +30,38 @@ export default class UserStore extends Store {
 
       return accessToken;
     } catch (e) {
+      const message = e.response.data;
+      this.changeLoginErrorState({ errorMessage: message });
       return '';
     }
   }
 
   async register({ name, username, password }) {
+    this.errorMessage = '';
+
     try {
       const { amount } = await userApiService.createUser({ name, username, password });
       return amount;
     } catch (e) {
+      const message = e.response.data;
+      console.log(message);
+      this.changeRegisterErrorState({ errorMessage: message });
       return '';
     }
+  }
+
+  changeLoginErrorState({ errorMessage = '' } = {}) {
+    this.errorMessage = errorMessage;
+    this.errorState = 'loginError';
+
+    this.publish();
+  }
+
+  changeRegisterErrorState({ errorMessage = '' } = {}) {
+    this.errorMessage = errorMessage;
+    this.errorState = 'registerError';
+
+    this.publish();
   }
 }
 

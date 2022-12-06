@@ -8,9 +8,13 @@ export default class ProductApiService {
     this.accessToken = '';
   }
 
-  async fetchProducts() {
+  async fetchProducts(page) {
     const url = `${baseURL}/products`;
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(url, {
+      params: {
+        page,
+      },
+    });
 
     const { products } = data;
 

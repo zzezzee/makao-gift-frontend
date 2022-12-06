@@ -10,8 +10,10 @@ Scenario('상품 주문 화면', ({ I }) => {
 
 Scenario('상품 주문을 성공한 경우', ({ I }) => {
   // Given
-  // 로그인되어있어야 함
-  // 상품금액보다 많은 잔액
+  I.login({
+    username: 'test',
+    password: 'test',
+  });
 
   // When
   I.amOnPage('/order');
@@ -25,8 +27,7 @@ Scenario('상품 주문을 성공한 경우', ({ I }) => {
   I.click('button[type="submit"]');
 
   // Then
-  I.amOnPage('/orders');
-  // 주문을 볼 수 있음
+  I.ordersPage();
 });
 
 Scenario('구매수량을 조절하는 경우', ({ I }) => {
