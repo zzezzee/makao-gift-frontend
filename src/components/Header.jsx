@@ -24,11 +24,13 @@ export default function Header() {
 
   const userStore = useUserStore();
 
-  useEffect(() => {
-    userStore.fetchUser();
-  }, []);
-
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
+
+  useEffect(() => {
+    if (accessToken) {
+      userStore.fetchUser();
+    }
+  }, []);
 
   const handleLogout = () => {
     setAccessToken('');

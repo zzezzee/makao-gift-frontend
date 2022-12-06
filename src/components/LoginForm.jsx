@@ -53,12 +53,17 @@ export default function LoginForm() {
             placeholder="비밀번호"
             {...register('password', { required: true })}
           />
+          {userStore.errorState === 'loginError'
+            && !errors.username
+            && !errors.password
+            ? <p>{userStore.errorMessage}</p>
+            : null}
           {errors.username
-              && <p>아이디를 입력해주세요</p>}
-          {errors.password
-              && <p>비밀번호를 입력해 주세요</p>}
+               && <p>아이디를 입력해주세요</p>}
+          {errors.password && !errors.username
+            && <p>비밀번호를 입력해주세요</p>}
         </div>
-        <button type="submit">로그인</button>
+        <button type="submit">로그인하기</button>
       </form>
       <button type="button" onClick={handleClickRegister}>
         회원가입

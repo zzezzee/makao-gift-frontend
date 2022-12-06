@@ -11,30 +11,120 @@ jest.mock('react-router-dom', () => ({
   },
 }));
 
-test('LoginForm', async () => {
-  render(<LoginForm />);
+const context = describe;
 
-  screen.getByRole('heading', { name: 'USER LOGIN' });
+describe('LoginForm', () => {
+  function renderLoginForm() {
+    render(<LoginForm />);
+  }
 
-  fireEvent.change(screen.getByPlaceholderText(/아이디/), {
-    target: { value: '1234' },
+  context('when login success', () => {
+    it('go to homePage', async () => {
+      renderLoginForm();
+
+      screen.getByRole('heading', { name: 'USER LOGIN' });
+
+      fireEvent.change(screen.getByPlaceholderText(/아이디/), {
+        target: { value: '1234' },
+      });
+
+      fireEvent.change(screen.getByPlaceholderText(/비밀번호/), {
+        target: { value: 'Password123!' },
+      });
+
+      fireEvent.click(screen.getByRole('button', { name: '로그인하기' }));
+
+      await waitFor(() => {
+        expect(navigate).toBeCalledWith('/');
+      });
+    });
   });
 
-  fireEvent.change(screen.getByPlaceholderText(/비밀번호/), {
-    target: { value: 'Password123!' },
+  context('when login with empty username', () => {
+    it('login failed', async () => {
+      renderLoginForm();
+
+      screen.getByRole('heading', { name: 'USER LOGIN' });
+
+      fireEvent.change(screen.getByPlaceholderText(/아이디/), {
+        target: { value: '' },
+      });
+
+      fireEvent.change(screen.getByPlaceholderText(/비밀번호/), {
+        target: { value: 'Password123!' },
+      });
+
+      fireEvent.click(screen.getByRole('button', { name: '로그인하기' }));
+
+      await waitFor(() => {
+        screen.getByText('아이디를 입력해주세요');
+      });
+    });
   });
 
-  fireEvent.click(screen.getByRole('button', { name: '로그인' }));
+  context('when login with empty password', () => {
+    it('login failed', async () => {
+      renderLoginForm();
 
-  await waitFor(() => {
-    expect(navigate).toBeCalledWith('/');
+      screen.getByRole('heading', { name: 'USER LOGIN' });
+
+      fireEvent.change(screen.getByPlaceholderText(/아이디/), {
+        target: { value: '1234' },
+      });
+
+      fireEvent.change(screen.getByPlaceholderText(/비밀번호/), {
+        target: { value: '' },
+      });
+
+      fireEvent.click(screen.getByRole('button', { name: '로그인하기' }));
+
+      await waitFor(() => {
+        screen.getByText('비밀번호를 입력해주세요');
+      });
+    });
   });
-});
 
-test('LoginForm', () => {
-  render(<LoginForm />);
+  // context('when login with wrong username', () => {
+  //   it('login failed', async () => {
+  //     renderLoginForm();
 
-  fireEvent.click(screen.getByRole('button', { name: '회원가입' }));
+  //     screen.getByRole('heading', { name: 'USER LOGIN' });
 
-  expect(navigate).toBeCalledWith('/signup');
+  //     fireEvent.change(screen.getByPlaceholderText(/아이디/), {
+  //       target: { value: '12345' },
+  //     });
+
+  //     fireEvent.change(screen.getByPlaceholderText(/비밀번호/), {
+  //       target: { value: 'Password123!' },
+  //     });
+
+  //     fireEvent.click(screen.getByRole('button', { name: '로그인하기' }));
+
+  //     await waitFor(() => {
+  //       screen.getByText('아이디 혹은 비밀번호가 맞지 않습니다');
+  //     });
+  //   });
+  // });
+
+  // context('when login with wrong password', () => {
+  //   it('login failed', async () => {
+  //     renderLoginForm();
+
+  //     screen.getByRole('heading', { name: 'USER LOGIN' });
+
+  //     fireEvent.change(screen.getByPlaceholderText(/아이디/), {
+  //       target: { value: '1234' },
+  //     });
+
+  //     fireEvent.change(screen.getByPlaceholderText(/비밀번호/), {
+  //       target: { value: 'Passwoxxx' },
+  //     });
+
+  //     fireEvent.click(screen.getByRole('button', { name: '로그인하기' }));
+
+  //     await waitFor(() => {
+  //       screen.getByText('아이디 혹은 비밀번호가 맞지 않습니다');
+  //     });
+  //   });
+  // });
 });

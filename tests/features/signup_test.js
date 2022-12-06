@@ -122,25 +122,6 @@ Scenario('아이디를 입력하지 않고 회원가입', ({ I }) => {
   I.see('아이디를 입력해 주세요');
 });
 
-Scenario('양식에 안맞는 아이디로 회원가입', ({ I }) => {
-  // Given
-  // 등록된 계좌 지우기'
-  I.amOnPage('/signup');
-
-  // When
-  I.fillSignupFields({
-    name: '이건이름이다',
-    username: '한글이지롱',
-    password: 'password123',
-    confirmPassword: 'Password123!',
-  });
-
-  I.click('button[type="submit"]');
-
-  // then
-  I.see('비밀번호를 다시 확인해주세요');
-});
-
 Scenario('비밀번호를 입력하지 않고 회원가입', ({ I }) => {
   // Given
   // 등록된 계좌 지우기'
