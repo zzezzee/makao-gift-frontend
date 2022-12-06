@@ -3,7 +3,11 @@ import useProductStore from '../hooks/useProductStore';
 export default function Products() {
   const productStore = useProductStore();
 
-  const { products } = productStore;
+  const { products, pageArray } = productStore;
+
+  const handleClickChangePage = (page) => {
+    productStore.fetchProducts(page);
+  };
 
   return ((
     <div>
@@ -29,6 +33,17 @@ export default function Products() {
           ))
           : <p>상품이 존재하지 않습니다</p>}
       </ul>
+      <nav>
+        {pageArray.map((page) => (
+          <button
+            type="button"
+            onClick={() => handleClickChangePage(page)}
+            key={page}
+          >
+            {page}
+          </button>
+        ))}
+      </nav>
     </div>
   ));
 }
