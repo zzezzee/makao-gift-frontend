@@ -56,7 +56,7 @@ export default function LoginForm() {
           {userStore.errorState === 'loginError'
             && !errors.username
             && !errors.password
-            ? <p>{userStore.errorMessage}</p>
+            ? <p>아이디 혹은 비밀번호가 맞지 않습니다</p>
             : null}
           {errors.username
                && <p>아이디를 입력해주세요</p>}

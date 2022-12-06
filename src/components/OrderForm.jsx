@@ -85,7 +85,9 @@ export default function OrderForm() {
           <input
             id="input-message"
             type="message"
-            {...register('message')}
+            {...register('message', {
+              maxLength: 100,
+            })}
           />
           <p>100글자 이내로 입력해주세요</p>
         </div>

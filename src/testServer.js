@@ -73,17 +73,23 @@ const server = setupServer(
 
     return res(
       ctx.status(400),
-      ctx.json({
-        message: '아이디 혹은 비밀번호가 맞지 않습니다',
-      }),
     );
   }),
 
-  rest.post(`${baseURL}/users`, async (req, res, ctx) => res(
-    ctx.json({
-      amount: 500000,
-    }),
-  )),
+  rest.post(`${baseURL}/users`, async (req, res, ctx) => {
+    const { username } = await req.json();
+    if (username === 'existusername') {
+      return res(
+        ctx.status(400),
+      );
+    }
+
+    return res(
+      ctx.json({
+        amount: 500000,
+      }),
+    );
+  }),
 );
 
 export default server;

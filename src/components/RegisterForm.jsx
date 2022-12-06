@@ -12,7 +12,7 @@ export default function RegisterForm() {
 
   const onSubmit = async (data) => {
     const {
-      name, username, password, passwordConfirm,
+      name, username, password,
     } = data;
 
     const id = await userStore.register({
@@ -20,7 +20,7 @@ export default function RegisterForm() {
     });
 
     if (typeof id === 'number') {
-      navigate('/login');
+      navigate('/signup-success');
     }
   };
 
@@ -38,7 +38,7 @@ export default function RegisterForm() {
           {errors.name && errors.name.type === 'required'
             && (<p>이름을 입력해주세요</p>)}
           {errors.name && errors.name.type === 'pattern'
-            && (<p>3~7자까지 한글만 사용 가능</p>)}
+            && (<p>이름을 다시 확인해주세요</p>)}
           {!errors.name
             && (<p>3~7자까지 한글만 사용 가능</p>)}
         </div>
@@ -49,14 +49,16 @@ export default function RegisterForm() {
             id="input-username"
             {...register('username', { required: true, pattern: /^[a-z|0-9]{4,14}$/ })}
           />
-          {errors.username
-        && errors.username.type === 'required'
-        && (<p>영문소문자/숫자, 4~16자만 사용 가능</p>)}
-          {errors.username
-        && errors.username.type === 'pattern'
-            && (<p>해당 아이디는 사용할 수 없습니다</p>)}
+          {errors.username && errors.username.type === 'required'
+            && !userStore.errorState
+            && (<p>아이디를 입력해주세요</p>)}
+          {errors.username && errors.username.type === 'pattern'
+            && !userStore.errorState
+            && (<p>아이디를 다시 확인해주세요</p>)}
           {!errors.username
-          && (<p>로그인 및 거래시 사용될 계좌번호이며 숫자만 사용 가능(8글자)</p>)}
+            && (<p>영문소문자/숫자, 4~16자만 사용 가능</p>)}
+          {userStore.errorState === 'registerError'
+          && (<p>해당 아이디는 사용할 수 없습니다</p>)}
         </div>
         <div>
           <label htmlFor="input-password">비밀번호:</label>
@@ -73,7 +75,7 @@ export default function RegisterForm() {
         && (<p>비밀번호를 입력해주세요</p>)}
           {errors.password
         && errors.password.type !== 'required'
-        && (<p>8글자 이상의 영문(대소문자), 숫자, 특수문자가 모두 포함되어야 함</p>)}
+        && (<p>비밀번호를 다시 확인해주세요</p>)}
           {!errors.password
         && (<p>8글자 이상의 영문(대소문자), 숫자, 특수문자가 모두 포함되어야 함</p>)}
         </div>
@@ -99,3 +101,12 @@ export default function RegisterForm() {
     </div>
   ));
 }
+
+
+/*
+레벨테스트기간 나는 얼마나 열심히하고있을까?
+
+
+
+
+*/

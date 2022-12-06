@@ -84,47 +84,47 @@ describe('LoginForm', () => {
     });
   });
 
-  // context('when login with wrong username', () => {
-  //   it('login failed', async () => {
-  //     renderLoginForm();
+  context('when login with wrong username', () => {
+    it('login failed', async () => {
+      renderLoginForm();
 
-  //     screen.getByRole('heading', { name: 'USER LOGIN' });
+      screen.getByRole('heading', { name: 'USER LOGIN' });
 
-  //     fireEvent.change(screen.getByPlaceholderText(/아이디/), {
-  //       target: { value: '12345' },
-  //     });
+      fireEvent.change(screen.getByPlaceholderText(/아이디/), {
+        target: { value: '12345' },
+      });
 
-  //     fireEvent.change(screen.getByPlaceholderText(/비밀번호/), {
-  //       target: { value: 'Password123!' },
-  //     });
+      fireEvent.change(screen.getByPlaceholderText(/비밀번호/), {
+        target: { value: 'Password123!' },
+      });
 
-  //     fireEvent.click(screen.getByRole('button', { name: '로그인하기' }));
+      fireEvent.click(screen.getByRole('button', { name: '로그인하기' }));
 
-  //     await waitFor(() => {
-  //       screen.getByText('아이디 혹은 비밀번호가 맞지 않습니다');
-  //     });
-  //   });
-  // });
+      await waitFor(() => {
+        screen.getByText('아이디 혹은 비밀번호가 맞지 않습니다');
+      });
+    });
+  });
 
-  // context('when login with wrong password', () => {
-  //   it('login failed', async () => {
-  //     renderLoginForm();
+  context('when login with wrong password', () => {
+    it('login failed', async () => {
+      renderLoginForm();
 
-  //     screen.getByRole('heading', { name: 'USER LOGIN' });
+      screen.getByRole('heading', { name: 'USER LOGIN' });
 
-  //     fireEvent.change(screen.getByPlaceholderText(/아이디/), {
-  //       target: { value: '1234' },
-  //     });
+      fireEvent.change(screen.getByPlaceholderText(/아이디/), {
+        target: { value: '1234' },
+      });
 
-  //     fireEvent.change(screen.getByPlaceholderText(/비밀번호/), {
-  //       target: { value: 'Passwoxxx' },
-  //     });
+      fireEvent.change(screen.getByPlaceholderText(/비밀번호/), {
+        target: { value: 'Passwoxxx' },
+      });
 
-  //     fireEvent.click(screen.getByRole('button', { name: '로그인하기' }));
+      fireEvent.click(screen.getByRole('button', { name: '로그인하기' }));
 
-  //     await waitFor(() => {
-  //       screen.getByText('아이디 혹은 비밀번호가 맞지 않습니다');
-  //     });
-  //   });
-  // });
+      await waitFor(() => {
+        screen.getByText('아이디 혹은 비밀번호가 맞지 않습니다');
+      });
+    });
+  });
 });

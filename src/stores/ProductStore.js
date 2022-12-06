@@ -9,8 +9,8 @@ export default class ProductStore extends Store {
     this.product = {};
   }
 
-  async fetchProducts() {
-    this.products = await productApiService.fetchProducts();
+  async fetchProducts(page) {
+    this.products = await productApiService.fetchProducts(page);
 
     this.publish();
   }
