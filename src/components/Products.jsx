@@ -1,9 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import useProductStore from '../hooks/useProductStore';
 
 export default function Products() {
   const productStore = useProductStore();
+  const navigate = useNavigate();
 
-  const { products } = productStore;
+  const { products, pageArray } = productStore;
+
+  const handleClickChangePage = async (page) => {
+    await productStore.fetchProducts(page);
+    navigate(`/products?page=${page}`);
+  };
 
   return ((
     <div>
@@ -29,6 +36,17 @@ export default function Products() {
           ))
           : <p>상품이 존재하지 않습니다</p>}
       </ul>
+      <nav>
+        {pageArray.map((page) => (
+          <button
+            type="button"
+            onClick={() => handleClickChangePage(page)}
+            key={page}
+          >
+            {page}
+          </button>
+        ))}
+      </nav>
     </div>
   ));
 }

@@ -44,7 +44,6 @@ export default class UserStore extends Store {
       return amount;
     } catch (e) {
       const message = e.response.data;
-      console.log(message);
       this.changeRegisterErrorState({ errorMessage: message });
       return '';
     }

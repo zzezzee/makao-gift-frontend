@@ -18,6 +18,7 @@ const server = setupServer(
           description: '이건 상품설명 1번',
         },
       ],
+      pageCount: 1,
     }),
   )),
 

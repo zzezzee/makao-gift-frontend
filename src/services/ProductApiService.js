@@ -4,11 +4,7 @@ import config from '../config';
 const baseURL = config.apiBaseURL;
 
 export default class ProductApiService {
-  constructor() {
-    this.accessToken = '';
-  }
-
-  async fetchProducts(page) {
+  async fetchProducts(page = 1) {
     const url = `${baseURL}/products`;
     const { data } = await axios.get(url, {
       params: {
@@ -16,9 +12,7 @@ export default class ProductApiService {
       },
     });
 
-    const { products } = data;
-
-    return products;
+    return data;
   }
 
   async fetchProduct(id) {
