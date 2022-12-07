@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import theme from '../styles/Theme';
 import Header from './Header';
 
 const context = describe;
@@ -23,7 +25,9 @@ jest.mock('react-router-dom', () => ({
 describe('Header', () => {
   function renderHeader() {
     render(
-      <Header />,
+      <ThemeProvider theme={theme}>
+        <Header />
+      </ThemeProvider>,
     );
   }
   it('render header', () => {
