@@ -31,7 +31,7 @@ describe('ProductStore', () => {
 
   context('when only one product exists', () => {
     it('show product', async () => {
-      productStore.fetchProducts();
+      productStore.fetchProducts(1);
 
       render(<Products />);
 

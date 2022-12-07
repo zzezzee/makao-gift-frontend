@@ -101,12 +101,3 @@ export default function RegisterForm() {
     </div>
   ));
 }
-
-
-/*
-레벨테스트기간 나는 얼마나 열심히하고있을까?
-
-
-
-
-*/
