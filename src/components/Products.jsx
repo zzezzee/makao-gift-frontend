@@ -1,12 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import useProductStore from '../hooks/useProductStore';
 
 export default function Products() {
   const productStore = useProductStore();
+  const navigate = useNavigate();
 
   const { products, pageArray } = productStore;
 
-  const handleClickChangePage = (page) => {
-    productStore.fetchProducts(page);
+  const handleClickChangePage = async (page) => {
+    await productStore.fetchProducts(page);
+    navigate(`/products?page=${page}`);
   };
 
   return ((
