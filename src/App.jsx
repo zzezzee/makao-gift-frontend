@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { Reset } from 'styled-reset';
 import { useLocalStorage } from 'usehooks-ts';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
@@ -13,6 +15,8 @@ import SignupPage from './pages/SignupPage';
 import SignupSuccessPage from './pages/SignupSuccessPage';
 import { orderApiService } from './services/OrderApiService';
 import { userApiService } from './services/UserApiService';
+import GlobalStyle from './styles/GlobalStyle';
+import theme from './styles/Theme';
 
 export default function App() {
   const [accessToken] = useLocalStorage('accessToken', '');
@@ -23,7 +27,9 @@ export default function App() {
   }, [accessToken]);
 
   return ((
-    <div>
+    <ThemeProvider theme={theme}>
+      <Reset />
+      <GlobalStyle />
       <Header />
       <main>
         <Routes>
@@ -38,6 +44,6 @@ export default function App() {
           <Route path="/orders/:orderId" element={<OrderPage />} />
         </Routes>
       </main>
-    </div>
+    </ThemeProvider>
   ));
 }

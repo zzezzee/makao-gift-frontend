@@ -1,6 +1,8 @@
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
+import theme from '../styles/Theme';
 import Product from './Product';
 
 const context = describe;
@@ -25,9 +27,17 @@ jest.mock('../hooks/useProductStore', () => () => ({
 }));
 
 describe('Product', () => {
+  function renderProduct() {
+    render((
+      <ThemeProvider theme={theme}>
+        <Product />
+      </ThemeProvider>
+    ));
+  }
+
   context('when click plus button', () => {
     it('quantity increase', async () => {
-      render(<Product />);
+      renderProduct();
 
       fireEvent.click(screen.getByRole('button', { name: '+' }));
 
@@ -39,7 +49,7 @@ describe('Product', () => {
 
   context('when click minus button', () => {
     it('quantity decrease', async () => {
-      render(<Product />);
+      renderProduct();
 
       fireEvent.click(screen.getByRole('button', { name: '+' }));
 
@@ -53,7 +63,7 @@ describe('Product', () => {
 
   context('when click minus button at quantity is 0', () => {
     it('quantity unchanged', async () => {
-      render(<Product />);
+      renderProduct();
 
       fireEvent.click(screen.getByRole('button', { name: '-' }));
 
@@ -65,7 +75,7 @@ describe('Product', () => {
 
   context('when gift success', () => {
     it('go to order Page', async () => {
-      render(<Product />);
+      renderProduct();
 
       fireEvent.click(screen.getByRole('button', { name: '선물하기' }));
 

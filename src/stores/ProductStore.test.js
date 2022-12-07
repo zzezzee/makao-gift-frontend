@@ -14,7 +14,6 @@ describe('ProductStore', () => {
       await productStore.fetchProducts();
 
       expect(productStore.products.length).toBe(1);
-      expect(productStore.totalCount).toBe(1);
       expect(productStore.pageCount).toBe(1);
     });
   });
