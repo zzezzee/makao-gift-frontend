@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useOrderStore from '../hooks/useOrderStore';
 
@@ -37,10 +38,22 @@ const Message = styled.div`
   font-weight: 600;
 `;
 
+const Nav = styled.nav`
+  padding: 3em;
+  text-align: center;
+`;
+
 export default function Orders() {
   const orderStore = useOrderStore();
+  const navigate = useNavigate();
 
-  const { orders } = orderStore;
+  const { orders, pageArray } = orderStore;
+
+  const handleClickChangePage = async (page) => {
+    await orderStore.fetchOrders(page);
+
+    navigate(`/orders?page=${page}`);
+  };
 
   return ((
     <div>
@@ -66,6 +79,17 @@ export default function Orders() {
             </li>
           ))}
       </Items>
+      <Nav>
+        {pageArray.map((page) => (
+          <button
+            type="button"
+            onClick={() => handleClickChangePage(page)}
+            key={page}
+          >
+            {page}
+          </button>
+        ))}
+      </Nav>
     </div>
   ));
 }

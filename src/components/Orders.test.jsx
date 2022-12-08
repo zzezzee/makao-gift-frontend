@@ -3,6 +3,14 @@ import { ThemeProvider } from 'styled-components';
 import theme from '../styles/Theme';
 import Orders from './Orders';
 
+const navigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  useNavigate() {
+    return navigate;
+  },
+}));
+
 test('Orders', () => {
   render(
     <ThemeProvider theme={theme}>
