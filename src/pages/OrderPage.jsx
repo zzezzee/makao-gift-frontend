@@ -8,7 +8,7 @@ export default function OrderPage() {
 
   const orderStore = useOrderStore();
 
-  const orderId = location.pathname.split('/')[2];
+  const orderId = location.pathname?.split('/')[2] || '';
 
   useEffect(() => {
     orderStore.fetchOrder(orderId);

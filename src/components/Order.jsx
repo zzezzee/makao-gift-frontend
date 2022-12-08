@@ -6,7 +6,7 @@ export default function Order() {
 
   const { order } = orderStore;
 
-  const createdAt = order.createdAt.substring(0, 10);
+  const createdAt = order.createdAt?.substring(0, 10) || '';
 
   return ((
     <div>
