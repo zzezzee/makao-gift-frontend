@@ -32,29 +32,28 @@ module.exports = () => actor({
   seeLogoutHeader() {
     this.seeDefaultHeader();
     this.see('로그아웃');
-    this.see(/내 잔액:/);
   },
 
   // 회원가입 페이지
   seeSignupPage() {
     this.see('SIGN UP');
-    this.see('이름 :');
-    this.see('3-7자까지 한글만 사용 가능');
-    this.see('아이디 :');
+    this.see('이름:');
+    this.see('3~7자까지 한글만 사용 가능');
+    this.see('아이디:');
     this.see('영문소문자/숫자, 4~16자만 사용 가능');
-    this.see('비밀번호 :');
+    this.see('비밀번호:');
     this.see('8글자 이상의 영문(대소문자), 숫자, 특수문자가 모두 포함되어야 함');
-    this.see('비밀번호 확인 :');
+    this.see('비밀번호 확인:');
     this.see('회원가입');
   },
 
   fillSignupFields({
-    name, identification, password, confirmPassword,
+    name, username, password, confirmPassword,
   }) {
-    this.fillField('이름 :', name);
-    this.fillField('아이디 :', identification);
-    this.fillField('비밀번호 :', password);
-    this.fillField('비밀번호 확인 :', confirmPassword);
+    this.fillField('이름:', name);
+    this.fillField('아이디:', username);
+    this.fillField('비밀번호:', password);
+    this.fillField('비밀번호 확인:', confirmPassword);
   },
 
   seeSignupSuccessPage() {

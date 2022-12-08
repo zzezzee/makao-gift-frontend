@@ -28,6 +28,10 @@ const Items = styled.ul`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+
+  p {
+    font-weight: 900;
+  }
 `;
 
 const Message = styled.div`
@@ -41,6 +45,14 @@ const Message = styled.div`
 const Nav = styled.nav`
   padding: 3em;
   text-align: center;
+`;
+
+const Button = styled.button`
+    border: 0;
+    outline: 0;
+    background-color: white;
+    font-size: 1em;
+    cursor: pointer;
 `;
 
 export default function Orders() {
@@ -81,13 +93,13 @@ export default function Orders() {
       </Items>
       <Nav>
         {pageArray.map((page) => (
-          <button
+          <Button
             type="button"
             onClick={() => handleClickChangePage(page)}
             key={page}
           >
             {page}
-          </button>
+          </Button>
         ))}
       </Nav>
     </div>

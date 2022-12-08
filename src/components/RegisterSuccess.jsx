@@ -26,6 +26,11 @@ const Container = styled.div`
   }
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export default function RegisterSuccess() {
   const navigate = useNavigate();
 
@@ -42,7 +47,9 @@ export default function RegisterSuccess() {
       <p>
         정상적인 서비스 이용을 위해 로그인을 진행해주세요.
       </p>
-      <Button type="button" onClick={handleClickLogin}>로그인하기</Button>
+      <ButtonWrapper>
+        <Button type="button" onClick={handleClickLogin}>로그인하기</Button>
+      </ButtonWrapper>
     </Container>
   ));
 }

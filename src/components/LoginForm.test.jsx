@@ -1,4 +1,5 @@
 import {
+  cleanup,
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
@@ -42,6 +43,7 @@ describe('LoginForm', () => {
 
       await waitFor(() => {
         expect(navigate).toBeCalledWith('/');
+        cleanup();
       });
     });
   });
@@ -64,6 +66,7 @@ describe('LoginForm', () => {
 
       await waitFor(() => {
         screen.getByText('아이디를 입력해주세요');
+        cleanup();
       });
     });
   });
@@ -86,6 +89,7 @@ describe('LoginForm', () => {
 
       await waitFor(() => {
         screen.getByText('비밀번호를 입력해주세요');
+        cleanup();
       });
     });
   });
@@ -108,6 +112,7 @@ describe('LoginForm', () => {
 
       await waitFor(() => {
         screen.getByText('아이디 혹은 비밀번호가 맞지 않습니다');
+        cleanup();
       });
     });
   });
@@ -130,6 +135,7 @@ describe('LoginForm', () => {
 
       await waitFor(() => {
         screen.getByText('아이디 혹은 비밀번호가 맞지 않습니다');
+        cleanup();
       });
     });
   });

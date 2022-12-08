@@ -43,18 +43,26 @@ export default function Products() {
       </Items>
       <Nav>
         {pageArray.map((page) => (
-          <button
+          <Button
             type="button"
             onClick={() => handleClickChangePage(page)}
             key={page}
           >
             {page}
-          </button>
+          </Button>
         ))}
       </Nav>
     </div>
   ));
 }
+
+const Button = styled.button`
+    border: 0;
+    outline: 0;
+    background-color: white;
+    font-size: 1em;
+    cursor: pointer;
+`;
 
 const Items = styled.ul`
   display: grid;
