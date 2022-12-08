@@ -12,17 +12,18 @@ export default class OrderApiService {
     this.accessToken = accessToken;
   }
 
-  async fetchOrders() {
+  async fetchOrders(page = 1) {
     const url = `${baseURL}/orders`;
     const { data } = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${this.accessToken}`,
       },
+      params: {
+        page,
+      },
     });
 
-    const { orders } = data;
-
-    return orders;
+    return data;
   }
 
   async fetchOrder(id) {

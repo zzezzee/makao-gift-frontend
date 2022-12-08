@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useOrderStore from '../hooks/useOrderStore';
 
@@ -27,6 +28,10 @@ const Items = styled.ul`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+
+  p {
+    font-weight: 900;
+  }
 `;
 
 const Message = styled.div`
@@ -37,10 +42,30 @@ const Message = styled.div`
   font-weight: 600;
 `;
 
+const Nav = styled.nav`
+  padding: 3em;
+  text-align: center;
+`;
+
+const Button = styled.button`
+    border: 0;
+    outline: 0;
+    background-color: white;
+    font-size: 1em;
+    cursor: pointer;
+`;
+
 export default function Orders() {
   const orderStore = useOrderStore();
+  const navigate = useNavigate();
 
-  const { orders } = orderStore;
+  const { orders, pageArray } = orderStore;
+
+  const handleClickChangePage = async (page) => {
+    await orderStore.fetchOrders(page);
+
+    navigate(`/orders?page=${page}`);
+  };
 
   return ((
     <div>
@@ -66,6 +91,17 @@ export default function Orders() {
             </li>
           ))}
       </Items>
+      <Nav>
+        {pageArray.map((page) => (
+          <Button
+            type="button"
+            onClick={() => handleClickChangePage(page)}
+            key={page}
+          >
+            {page}
+          </Button>
+        ))}
+      </Nav>
     </div>
   ));
 }

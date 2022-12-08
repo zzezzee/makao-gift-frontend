@@ -5,7 +5,7 @@ Scenario('회원가입 화면 UI', ({ I }) => {
   I.amOnPage('/signup');
 
   // Then
-  I.seeSignUpPage();
+  I.seeSignupPage();
 });
 
 Scenario('올바른 정보로 회원가입', ({ I }) => {
@@ -24,12 +24,11 @@ Scenario('올바른 정보로 회원가입', ({ I }) => {
   I.click('button[type="submit"]');
 
   // then
-  I.seeWelcomePage();
+  I.seeSignupSuccessPage();
 });
 
 Scenario('이름을 입력하지 않고 회원가입', ({ I }) => {
   // Given
-  // 등록된 계좌 지우기'
   I.amOnPage('/signup');
 
   // When
@@ -43,7 +42,7 @@ Scenario('이름을 입력하지 않고 회원가입', ({ I }) => {
   I.click('button[type="submit"]');
 
   // then
-  I.see('이름을 입력해 주세요');
+  I.see('이름을 입력해주세요');
 });
 
 Scenario('양식에 안맞는 이름으로 회원가입', ({ I }) => {
@@ -86,13 +85,13 @@ Scenario('양식에 안맞는 아이디로 회원가입', ({ I }) => {
 
 Scenario('중복된 아이디로 회원가입', ({ I }) => {
   // Given
-  // 미리 아이디를 등록
+  I.setupDatabase();
   I.amOnPage('/signup');
 
   // When
   I.fillSignupFields({
     name: '이건이름이다',
-    username: 'existusername',
+    username: 'test',
     password: 'Password123!',
     confirmPassword: 'Password123!',
   });
@@ -119,7 +118,7 @@ Scenario('아이디를 입력하지 않고 회원가입', ({ I }) => {
   I.click('button[type="submit"]');
 
   // then
-  I.see('아이디를 입력해 주세요');
+  I.see('아이디를 입력해주세요');
 });
 
 Scenario('비밀번호를 입력하지 않고 회원가입', ({ I }) => {
@@ -138,7 +137,7 @@ Scenario('비밀번호를 입력하지 않고 회원가입', ({ I }) => {
   I.click('button[type="submit"]');
 
   // then
-  I.see('아이디를 입력해 주세요');
+  I.see('비밀번호를 입력해주세요');
 });
 
 Scenario('비밀번호와 비밀번호 확인이 다른 경우', ({ I }) => {
@@ -176,5 +175,5 @@ Scenario('비밀번호 확인을 입력하지 않고 회원가입', ({ I }) => {
   I.click('button[type="submit"]');
 
   // then
-  I.see('아이디를 입력해 주세요');
+  I.see('비밀번호를 입력해주세요');
 });

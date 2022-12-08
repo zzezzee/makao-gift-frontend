@@ -56,7 +56,12 @@ const server = setupServer(
 
   rest.post(`${baseURL}/orders`, async (req, res, ctx) => res(
     ctx.json({
-      id: 1,
+      orders: [
+        {
+          id: 1,
+        },
+      ],
+      pageCount: 1,
     }),
   )),
 

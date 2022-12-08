@@ -9,10 +9,18 @@ export default class OrderStore extends Store {
     this.order = {};
 
     this.orderState = '';
+
+    this.pageCount = 0;
+    this.pageArray = [];
   }
 
-  async fetchOrders() {
-    this.orders = await orderApiService.fetchOrders();
+  async fetchOrders(page) {
+    const { orders, pageCount } = await orderApiService.fetchOrders(page);
+
+    this.orders = orders;
+    this.pageCount = pageCount;
+
+    this.pageArray = Array(this.pageCount).fill().map((_, i) => i + 1);
 
     this.publish();
   }
