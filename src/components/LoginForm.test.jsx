@@ -1,6 +1,8 @@
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
+import theme from '../styles/Theme';
 import LoginForm from './LoginForm';
 
 const navigate = jest.fn();
@@ -15,7 +17,11 @@ const context = describe;
 
 describe('LoginForm', () => {
   function renderLoginForm() {
-    render(<LoginForm />);
+    render((
+      <ThemeProvider theme={theme}>
+        <LoginForm />
+      </ThemeProvider>
+    ));
   }
 
   context('when login success', () => {

@@ -20,7 +20,7 @@ Scenario('정상적으로 로그인', ({ I }) => {
   });
 
   // Then
-  // I.seeLogoutHeader();
+  I.seeLogoutHeader();
   I.seeHomePage();
 });
 

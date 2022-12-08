@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import theme from '../styles/Theme';
 import Header from './Header';

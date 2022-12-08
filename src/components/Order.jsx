@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import useOrderStore from '../hooks/useOrderStore';
 import numberFormat from '../utils/numberFormat';
 
-const Container = styled.article`
+const Container = styled.div`
   text-align: center;
 `;
 const Table = styled.table`
@@ -43,30 +43,32 @@ export default function Order() {
       <p>{order.maker}</p>
       <p>{order.name}</p>
       <Table>
-        <tr>
-          <th>구매수량</th>
-          <td>{order.quantity}</td>
-        </tr>
-        <tr>
-          <th>총 상품금액</th>
-          <td>{numberFormat(order.totalPrice)}</td>
-        </tr>
-        <tr>
-          <th>구매일</th>
-          <td>{createdAt}</td>
-        </tr>
-        <tr>
-          <th> 받는 분</th>
-          <td>{order.receiver}</td>
-        </tr>
-        <tr>
-          <th>받는 분 주소</th>
-          <td>{order.address}</td>
-        </tr>
-        <tr>
-          <th>받는 분께 보내는 메세지</th>
-          <td>{order.message}</td>
-        </tr>
+        <tbody>
+          <tr>
+            <th>구매수량</th>
+            <td>{order.quantity}</td>
+          </tr>
+          <tr>
+            <th>총 상품금액</th>
+            <td>{numberFormat(order.totalPrice)}</td>
+          </tr>
+          <tr>
+            <th>구매일</th>
+            <td>{createdAt}</td>
+          </tr>
+          <tr>
+            <th> 받는 분</th>
+            <td>{order.receiver}</td>
+          </tr>
+          <tr>
+            <th>받는 분 주소</th>
+            <td>{order.address}</td>
+          </tr>
+          <tr>
+            <th>받는 분께 보내는 메세지</th>
+            <td>{order.message}</td>
+          </tr>
+        </tbody>
       </Table>
     </Container>
   ));

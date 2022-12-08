@@ -26,6 +26,10 @@ jest.mock('../hooks/useProductStore', () => () => ({
   },
 }));
 
+jest.mock('../hooks/useUserStore', () => () => ({
+  amount: 10000,
+}));
+
 describe('Product', () => {
   function renderProduct() {
     render((
@@ -69,6 +73,20 @@ describe('Product', () => {
 
       await waitFor(() => {
         screen.getByText('1');
+      });
+    });
+  });
+
+  context('when amount insufficient', () => {
+    it('order failed', async () => {
+      renderProduct();
+
+      fireEvent.click(screen.getByRole('button', { name: '+' }));
+
+      fireEvent.click(screen.getByRole('button', { name: '선물하기' }));
+
+      await waitFor(() => {
+        screen.getByText(/잔액이 부족하여 선물하기가 불가합니다/);
       });
     });
   });

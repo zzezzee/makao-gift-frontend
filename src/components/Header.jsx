@@ -84,6 +84,14 @@ const List = styled.ul`
     margin: 1em;
     padding-inline: .5em;
   }
+
+  button {
+    border: 0;
+    outline: 0;
+    background-color: white;
+    font-size: 1em;
+    font-weight: 600;
+  }
 `;
 
 const Nav = styled.nav`
