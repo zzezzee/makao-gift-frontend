@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 import useProductStore from '../hooks/useProductStore';
+import useUserStore from '../hooks/useUserStore';
 import Button from '../ui/Button';
 import numberFormat from '../utils/numberFormat';
 
@@ -70,11 +71,19 @@ const TotalPrice = styled.h3`
   }
 `;
 
+const Error = styled.p`
+  text-align: center;
+  padding: 1em;
+  color: red;
+`;
+
 export default function Product() {
   const navigate = useNavigate();
 
+  const userStore = useUserStore();
   const productStore = useProductStore();
 
+  const { amount } = userStore;
   const { product } = productStore;
 
   const [quantity, setQuantity] = useState(1);
@@ -82,6 +91,8 @@ export default function Product() {
   const {
     maker, name, price, description, image,
   } = product;
+
+  const totalPrice = quantity * price;
 
   const handleClickMinus = () => {
     if (quantity > 1) {
@@ -94,7 +105,7 @@ export default function Product() {
   };
 
   const handleClickGift = () => {
-    if (quantity >= 1) {
+    if (amount >= totalPrice && quantity >= 1) {
       navigate('/order', {
         state: {
           product,
@@ -149,11 +160,14 @@ export default function Product() {
           총 상품금액:
           {' '}
           <strong>
-            {numberFormat(price * quantity)}
+            {numberFormat(totalPrice)}
             원
           </strong>
         </TotalPrice>
         <Button type="button" onClick={handleClickGift}>선물하기</Button>
+        {userStore.amount < (totalPrice)
+          ? <Error>❌ 잔액이 부족하여 선물하기가 불가합니다 ❌</Error>
+          : null}
       </div>
     </Container>
   ));

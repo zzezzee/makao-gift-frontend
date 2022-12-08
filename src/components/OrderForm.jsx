@@ -25,8 +25,7 @@ const Container = styled.article`
 
 const Product = styled.div`  
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 90%;
 `;
 
 const Form = styled.form`
@@ -35,14 +34,19 @@ const Form = styled.form`
   input {
     width: 100%;
     height: 40px;
+/* 
+    :focus {
+      outline: none;
+      border: 1px solid red;
+    } */
   }
 
   div {
     margin-bottom: 1em;
   }
 
-  label {
-    display: block;
+  span {
+    color: red;
   }
 `;
 
@@ -59,6 +63,10 @@ const Error = styled.p`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const Maker = styled.p`
+  color: gray;
 `;
 
 export default function OrderForm() {
@@ -102,7 +110,7 @@ export default function OrderForm() {
       <Product>
         <img alt="우유" src={image} height="220" width="180" />
         <div>
-          <p>{maker}</p>
+          <Maker>{maker}</Maker>
           <p>{name}</p>
           <p>
             구매수량:
@@ -118,6 +126,7 @@ export default function OrderForm() {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="input-receiver">받는 분 성함</label>
+          <span>*</span>
           <input
             id="input-receiver"
             type="text"
@@ -132,6 +141,7 @@ export default function OrderForm() {
         </div>
         <div>
           <label htmlFor="input-address">받는 분 주소</label>
+          <span>*</span>
           <input
             type="text"
             id="input-address"

@@ -1,6 +1,5 @@
 import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import { orderStore } from '../stores/OrderStore';
 import theme from '../styles/Theme';
 import OrderPage from './OrderPage';
 
@@ -20,5 +19,6 @@ test('OrderPage', () => {
   render((
     <ThemeProvider theme={theme}>
       <OrderPage />
-    </ThemeProvider>));
+    </ThemeProvider>
+  ));
 });

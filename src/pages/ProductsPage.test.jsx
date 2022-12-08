@@ -1,6 +1,5 @@
 import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import { productStore } from '../stores/ProductStore';
 import theme from '../styles/Theme';
 import ProductsPage from './ProductsPage';
 

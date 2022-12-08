@@ -29,7 +29,7 @@ const Items = styled.ul`
   }
 `;
 
-const Message = styled.p`
+const Message = styled.div`
   margin-top: 2em;
   padding: 1em 2em;
 

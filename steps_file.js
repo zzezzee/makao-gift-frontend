@@ -5,7 +5,8 @@ module.exports = () => actor({
   // 홈페이지
   seeHomePage() {
     this.see('무얼 선물할 지 고민이라면');
-    this.see('특별한 아이템을 전하세요');
+    this.see('특별한');
+    this.see('아이템을 전하세요');
     this.see('마카오 선물하기에서만 볼 수 있는 특별한 아이템');
   },
   // 상품 목록 페이지
@@ -31,7 +32,7 @@ module.exports = () => actor({
   seeLogoutHeader() {
     this.seeDefaultHeader();
     this.see('로그아웃');
-    this.see('내 잔액:');
+    this.see(/내 잔액:/);
   },
 
   // 회원가입 페이지

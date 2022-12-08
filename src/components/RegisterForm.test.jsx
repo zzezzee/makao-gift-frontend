@@ -1,6 +1,8 @@
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
+import theme from '../styles/Theme';
 import RegisterForm from './RegisterForm';
 
 const navigate = jest.fn();
@@ -15,7 +17,11 @@ const context = describe;
 
 describe('RegisterForm', () => {
   function renderRegisterForm() {
-    render((<RegisterForm />));
+    render((
+      <ThemeProvider theme={theme}>
+        <RegisterForm />
+      </ThemeProvider>
+    ));
   }
 
   context('when register success', () => {
