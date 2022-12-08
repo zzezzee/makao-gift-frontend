@@ -7,7 +7,7 @@ export default function ProductsPage() {
   const productStore = useProductStore();
   const location = useLocation();
 
-  const page = location.search.split('=')[1];
+  const page = location.search?.split('=')[1] || '';
 
   useEffect(() => {
     productStore.fetchProducts(page);
