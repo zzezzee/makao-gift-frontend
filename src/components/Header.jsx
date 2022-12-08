@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useLocalStorage } from 'usehooks-ts';
 import useUserStore from '../hooks/useUserStore';
+import numberFormat from '../utils/numberFormat';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export default function Header() {
               <li>
                 내 잔액:
                 {' '}
-                {userStore.amount}
+                {numberFormat(userStore.amount)}
               </li>
               <li>
                 <button type="button" onClick={handleLogout}>로그아웃</button>
@@ -99,17 +100,3 @@ const Nav = styled.nav`
     font-size: 1.5em;
   }
 `;
-
-/*
-TIL
-
-레벨테스트 스타일가이드
-
-reset으로 초기화
-
-Theme에서 기본적으로 사용할 글자색, 색상, 사이즈 설정
-
-GlobalStyle에서 기본으로 사용할 스타일 적용
-
-
-*/

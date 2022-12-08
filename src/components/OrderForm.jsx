@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
 import { orderStore } from '../stores/OrderStore';
+import numberFormat from '../utils/numberFormat';
 
 export default function OrderForm() {
   const { state } = useLocation();
@@ -50,7 +51,7 @@ export default function OrderForm() {
       <p>
         총 상품금액:
         {' '}
-        { price * quantity}
+        {numberFormat(price * quantity)}
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>

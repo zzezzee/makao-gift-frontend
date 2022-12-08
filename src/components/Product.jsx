@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 import useProductStore from '../hooks/useProductStore';
+import numberFormat from '../utils/numberFormat';
 
 const Container = styled.article`
   display: flex;
@@ -79,7 +80,7 @@ export default function Product() {
       <div>
         <Title>{name}</Title>
         <Price>
-          {price}
+          {numberFormat(price)}
           원
         </Price>
         <p>
@@ -98,7 +99,7 @@ export default function Product() {
         <p>
           총 상품금액:
           {' '}
-          {price * quantity}
+          {numberFormat(price * quantity)}
           원
         </p>
         <button type="button" onClick={handleClickGift}>선물하기</button>
