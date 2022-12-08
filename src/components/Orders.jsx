@@ -1,4 +1,41 @@
+import styled from 'styled-components';
 import useOrderStore from '../hooks/useOrderStore';
+
+const Items = styled.ul`
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+
+  padding: 0em 3em;
+
+  h4 {
+    font-size: ${((props) => props.theme.size.h6)};
+    color: ${((props) => props.theme.text.tertiary)};
+  }
+
+  h3 {
+    display: -webkit-box;
+    overflow: hidden;
+    margin-block: 8px;
+    
+    text-overflow: ellipsis;
+    font-size: ${((props) => props.theme.size.default)};
+
+    color: ${((props) => props.theme.text.secondary)};
+
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+`;
+
+const Message = styled.p`
+  margin-top: 2em;
+  padding: 1em 2em;
+
+  font-size: ${((props) => props.theme.size.h5)};
+  font-weight: 600;
+`;
 
 export default function Orders() {
   const orderStore = useOrderStore();
@@ -7,17 +44,19 @@ export default function Orders() {
 
   return ((
     <div>
-      {orders.length
-        ? <p>내가 주문한 내역입니다</p>
-        : <p>내가 주문한 내역이 없습니다</p> }
-      <ul>
+      <Message>
+        {orders.length
+          ? <p>내가 주문한 내역입니다</p>
+          : <p>내가 주문한 내역이 없습니다</p>}
+      </Message>
+      <Items>
         {orders.length !== 0
           && orders.map((order) => (
             <li key={order.id}>
               <a href={`/orders/${order.id}`}>
                 <img src={order.image} alt="상품사진" height="220" width="180" />
-                <p>{order.maker}</p>
-                <p>{order.name}</p>
+                <h4>{order.maker}</h4>
+                <h3>{order.name}</h3>
                 <p>
                   To.
                   {' '}
@@ -26,7 +65,7 @@ export default function Orders() {
               </a>
             </li>
           ))}
-      </ul>
+      </Items>
     </div>
   ));
 }

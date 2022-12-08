@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 import useProductStore from '../hooks/useProductStore';
+import Button from '../ui/Button';
 import numberFormat from '../utils/numberFormat';
 
 const Container = styled.article`
@@ -34,8 +35,39 @@ const Price = styled.h2`
   font-weight: 700;
 `;
 
-const Maker = styled.p`
-  display: flex;
+const Table = styled.table`
+  tr {
+    border-top: 1px solid ${((props) => props.theme.colors.border)};
+    border-bottom: 1px solid ${((props) => props.theme.colors.border)};
+  }
+
+  th {
+    padding-right: 60px;
+    color: #666666;
+    font-size: ${((props) => props.theme.size.default)};
+    font-weight: 500;
+    text-align: left;
+  }
+
+  td {
+    font-size: ${((props) => props.theme.size.h5)};
+  }
+
+  th, td {
+    padding-block: 20px;
+  }
+`;
+
+const TotalPrice = styled.h3`
+  margin-block: 30px;
+  font-size: ${((props) => props.theme.size.default)};
+  font-weight: 500;
+  text-align: right;
+  strong {
+    vertical-align: middle;
+    font-size: ${((props) => props.theme.size.h1)};
+    font-weight: 700;
+  }
 `;
 
 export default function Product() {
@@ -83,26 +115,45 @@ export default function Product() {
           {numberFormat(price)}
           원
         </Price>
-        <p>
-          제조사
-          {maker}
-        </p>
-        구매 수량
-        <button type="button" onClick={handleClickMinus}>-</button>
-        <div>{quantity}</div>
-        <button type="button" onClick={handleClickPlus}>+</button>
-        <p>
-          상품설명
-          {' '}
-          {description}
-        </p>
-        <p>
+        <Table>
+          <tbody>
+            <tr>
+              <th>제조사</th>
+              <td>{maker}</td>
+            </tr>
+            <tr>
+              <th>구매 수량</th>
+              <td>
+                <button
+                  type="button"
+                  onClick={handleClickMinus}
+                >
+                  -
+                </button>
+                <span>{quantity}</span>
+                <button
+                  type="button"
+                  onClick={handleClickPlus}
+                >
+                  +
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <th>상품설명</th>
+              <td>{description}</td>
+            </tr>
+          </tbody>
+        </Table>
+        <TotalPrice>
           총 상품금액:
           {' '}
-          {numberFormat(price * quantity)}
-          원
-        </p>
-        <button type="button" onClick={handleClickGift}>선물하기</button>
+          <strong>
+            {numberFormat(price * quantity)}
+            원
+          </strong>
+        </TotalPrice>
+        <Button type="button" onClick={handleClickGift}>선물하기</Button>
       </div>
     </Container>
   ));

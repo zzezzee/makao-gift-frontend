@@ -1,6 +1,8 @@
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
+import theme from '../styles/Theme';
 import OrderForm from './OrderForm';
 
 const navigate = jest.fn();
@@ -30,9 +32,11 @@ const context = describe;
 describe('Order', () => {
   context('when click 선물하기 with correct input', () => {
     it('go to orders page', async () => {
-      render(
-        <OrderForm />,
-      );
+      render((
+        <ThemeProvider theme={theme}>
+          <OrderForm />
+        </ThemeProvider>
+      ));
 
       fireEvent.change(screen.getByLabelText('받는 분 성함'), {
         target: { value: '홍길동' },

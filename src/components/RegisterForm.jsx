@@ -1,7 +1,48 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { userStore } from '../stores/UserStore';
+import Button from '../ui/Button';
+
+const Container = styled.article`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+`;
+
+const Title = styled.h2`
+  padding-block: 10px;
+  width: 35%;
+  border-bottom: 1px solid ${((props) => props.theme.colors.primary)};
+
+  font-size: ${((props) => props.theme.size.h1)};
+  font-weight: 700;
+  text-align: center;
+
+  margin-bottom: 1em;
+`;
+
+const Form = styled.form`
+  div {
+    padding: 1em;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  input {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 7px;
+  }
+`;
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -25,9 +66,9 @@ export default function RegisterForm() {
   };
 
   return ((
-    <div>
-      <h1>SIGN UP</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <Container>
+      <Title>SIGN UP</Title>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="input-name">이름:</label>
           <input
@@ -96,8 +137,8 @@ export default function RegisterForm() {
         && errors.confirmPassword.type !== 'required'
         && (<p>비밀번호가 일치하지 않습니다</p>)}
         </div>
-        <button type="submit">회원가입</button>
-      </form>
-    </div>
+        <Button type="submit">회원가입</Button>
+      </Form>
+    </Container>
   ));
 }
