@@ -1,9 +1,12 @@
 import useOrderStore from '../hooks/useOrderStore';
+import numberFormat from '../utils/numberFormat';
 
 export default function Order() {
   const orderStore = useOrderStore();
 
   const { order } = orderStore;
+
+  const createdAt = order.createdAt.substring(0, 10);
 
   return ((
     <div>
@@ -17,12 +20,12 @@ export default function Order() {
       <p>
         총 상품금액
         {' '}
-        {order.totalPrice}
+        {numberFormat(order.totalPrice)}
       </p>
       <p>
         구매일
         {' '}
-        {order.createdAt}
+        {createdAt}
       </p>
       <p>
         받는 분

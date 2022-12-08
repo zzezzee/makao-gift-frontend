@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useProductStore from '../hooks/useProductStore';
+import numberFormat from '../utils/numberFormat';
 import ProductsBanner from './ProductsBanner';
 
 export default function Products() {
@@ -32,7 +33,7 @@ export default function Products() {
                 <h4>{product.maker}</h4>
                 <h3>{product.name}</h3>
                 <strong>
-                  {product.price}
+                  {numberFormat(product.price)}
                   원
                 </strong>
               </a>
